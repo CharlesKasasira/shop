@@ -12,9 +12,8 @@ import {
     Switch, Route 
 } from 'react-router-dom'
 
-function Router() {
+function MyRouter() {
     return (
-        <div>
            <Router>
                 <Switch>
                     
@@ -22,13 +21,12 @@ function Router() {
                         <Home />
                     </Route>
                     <Route>
-                        
+
                     </Route>
 
                 </Switch>
             </Router> 
-        </div>
     )
 }
 
-export default App
+export default MyRouter 
