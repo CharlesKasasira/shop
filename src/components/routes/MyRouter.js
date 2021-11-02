@@ -1,4 +1,6 @@
 import React from 'react'
+import PrivateRoute from './PrivateRoute'
+import NotAuthorized from '../views/NotAuthorized'
 import Login from '../views/Login'
 import Pay from '../views/Pay'
 import Dashboard from '../views/Dashboard'
@@ -7,6 +9,7 @@ import Checkout from '../views/Checkout'
 import Account from '../views/Account'
 import Home from '../views/Home'
 import NotFound from '../views/NotFound'
+import NotLoggedIn from './NotLoggedIn'
 
 import {
     BrowserRouter as Router,
@@ -24,21 +27,24 @@ function MyRouter() {
                     <Route path='/login'>
                         <Login />
                     </Route>
+                    <Route path='/not-logged-in'>
+                        <NotLoggedIn />
+                    </Route>
                     <Route path='/cart'>
                         <Cart />
                     </Route>
                     <Route path='/checkout'>
                         <Checkout />
                     </Route>
-                    <Route path='/dashboard'> 
+                    <PrivateRoute path='/dashboard'> 
                         <Dashboard />
-                    </Route>
-                    <Route path='/account'>
+                    </PrivateRoute>
+                    <PrivateRoute path='/account'>
                         <Account />
-                    </Route>
-                    <Route path='/pay'>
+                    </PrivateRoute>
+                    <PrivateRoute path='/pay'>
                         <Pay />
-                    </Route>
+                    </PrivateRoute>
                     {/* page not found */}
                     <Route path='*'>
                         <NotFound />
