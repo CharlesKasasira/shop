@@ -46,6 +46,10 @@ function Home() {
         setItemsInCart([...filteredCartItems, ...selectItem])
     }
 
+    const isItemInCart = itemID => {
+        const isfilteredItem = inventoryItems.filter(inventoryItem => inventoryItem._id === itemID)
+    }
+
 
     return (
         <div>
