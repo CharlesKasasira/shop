@@ -1,4 +1,5 @@
 import {useState} from 'react'
+import { Link } from 'react-router-dom';
 
 function Home() {
 
@@ -47,7 +48,9 @@ function Home() {
     }
 
     const isItemInCart = itemID => {
-        const isfilteredItem = inventoryItems.filter(inventoryItem => inventoryItem._id === itemID)
+        const filteredCartItems = itemsInCart.filter(itemInCart => itemInCart._id === itemID)
+
+        return (filteredCartItems?.length > 0) ? true : false
     }
 
 
@@ -70,7 +73,11 @@ function Home() {
                                 <div className="cta">
                                     <button><span>Wishlist</span></button>
                                     <button><span>rating</span></button>
-                                    <button onClick={() => addItemtoCart(inventoryItem._id)}><span>Cart</span></button>
+                                    
+                                    {isItemInCart(inventoryItem._id)
+                                    ? <Link to="/cart">view cart</Link>
+                                    : <button onClick={() => addItemtoCart(inventoryItem._id)}><span>Cart</span></button>
+                                }
                                     <button><span>Buy Now</span></button>
                                 </div>
                             </li>
