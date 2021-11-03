@@ -1,14 +1,14 @@
 import { createContext, useState, useEffect, useContext } from "react"
 
-const AuthContext = React.createContext()
+const AuthContext = createContext()
 
 export function useAuth() {
-    return React.useContext( AuthContext )
+    return useContext( AuthContext )
 }
 
 function AuthProvider({children}) {
-    const [currentUser, setCurrentUser] = React.useState(null)
-    const [loading, setLoading] = React.useState(true)
+    const [currentUser, setCurrentUser] = useState(null)
+    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         const loggedIn = parseInt(localStorage.getItem('loggedIN'))

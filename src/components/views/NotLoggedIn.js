@@ -1,15 +1,19 @@
-import { useEffect } from "react";
-import { Redirect } from "react-router";
+import { useEffect, useState } from "react";
+import { Redirect, useHistory } from "react-router";
 import { useAuth } from "../contexts/Auth";
 import Loader from "./uicomponent/Loader";
 
 function NotLoggedIn(){
+    const [isLoading, setLoading] = useState(true)
     const { setCurrentUser } = useAuth()
+    const history = useHistory()
+
+    const [isLogin, setLogin] = useState()
 
     useEffect(() => {
         const loggedIn = Number(localStorage.getItem('loggedIn'))
 
-        if(loggedIn= 1)
+        if(loggedIn === 1)
             setCurrentUser(loggedIn)
             setLogin(loggedIn)
             setLoading(false)

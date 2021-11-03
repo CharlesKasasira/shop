@@ -9,7 +9,7 @@ import Checkout from '../views/Checkout'
 import Account from '../views/Account'
 import Home from '../views/Home'
 import NotFound from '../views/NotFound'
-import NotLoggedIn from './NotLoggedIn'
+import NotLoggedIn from '../views/NotLoggedIn'
 
 import {
     BrowserRouter as Router,

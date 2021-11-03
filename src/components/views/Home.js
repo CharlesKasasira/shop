@@ -1,4 +1,4 @@
-import React from 'react'
+import {useState} from 'react'
 
 function Home() {
 
@@ -7,35 +7,51 @@ function Home() {
         style: 'currency',
         currency: 'UGX',
     });
+
+    const [itemsInCart, setItemsInCart] = useState([])
   
 
     const inventoryItems = [
         {
+            _id: 'x01',
             name: "Blue T-shirt",
             category: "All",
             price: 35000
         },
         {
+            _id: 'x02',
             name: "Black Shoes",
             category: "Men",
             price: 150000
         },
         {
+            _id: 'x03',
             name: "White Dress",
             category: "Women",
             price: 105000
         },
         {
+            _id: 'x04',
             name: "Macbook Air",
             category: "Tech",
             price: 45000000
         }
     ]
+
+    const addItemtoCart = itemID => {
+        const filteredCartItems = itemsInCart.filter(itemInCart => itemInCart._id !== itemID)
+        const selectItem = inventoryItems.filter(inventoryItem => inventoryItem._id === itemID)
+        selectItem[0].qty = 1
+
+        setItemsInCart([...filteredCartItems, ...selectItem])
+    }
+
+
     return (
         <div>
             <div className="header">
                 <h1>Shop now</h1>
-                <div><button>basket</button></div>
+                <div><button>{itemsInCart?.length} basket</button></div>
             </div>
             <ul className="item-list">
                 {
@@ -50,7 +66,7 @@ function Home() {
                                 <div className="cta">
                                     <button><span>Wishlist</span></button>
                                     <button><span>rating</span></button>
-                                    <button><span>Cart</span></button>
+                                    <button onClick={() => addItemtoCart(inventoryItem._id)}><span>Cart</span></button>
                                     <button><span>Buy Now</span></button>
                                 </div>
                             </li>
@@ -58,11 +74,6 @@ function Home() {
                     })
                 }
             </ul>
-            <button>add to cart</button>
-            <button>remove from cart</button>
-            <button>buy now</button>
-            <button>+</button>
-            <button>-</button>
 
         </div>
     )
