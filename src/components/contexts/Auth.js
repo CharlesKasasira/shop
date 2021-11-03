@@ -1,4 +1,4 @@
-import React from "react";
+import { createContext, useState, useEffect, useContext } from "react"
 
 const AuthContext = React.createContext()
 
@@ -9,6 +9,13 @@ export function useAuth() {
 function AuthProvider({children}) {
     const [currentUser, setCurrentUser] = React.useState(null)
     const [loading, setLoading] = React.useState(true)
+
+    useEffect(() => {
+        const loggedIn = parseInt(localStorage.getItem('loggedIN'))
+        if(loggedIn === 1) {
+            setCurrentUser(loggedIn)
+        }
+    }, [])
 
     const value = {
         loading,

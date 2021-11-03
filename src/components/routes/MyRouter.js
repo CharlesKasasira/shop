@@ -1,4 +1,4 @@
-import React from 'react'
+import PublicRoute from './PublicRoute'
 import PrivateRoute from './PrivateRoute'
 import NotAuthorized from '../views/NotAuthorized'
 import Login from '../views/Login'

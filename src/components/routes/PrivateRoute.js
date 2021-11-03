@@ -8,10 +8,6 @@ import {useAuth} from '../contexts/Auth'
 function PrivateRoute({children, ...rest}){{
     const { currentUser } = useAuth()
 
-    React.useEffect(() => {
-        console.log(currentUser)
-    }, [])
-
     return (
         <Route 
             {...rest}
@@ -19,7 +15,7 @@ function PrivateRoute({children, ...rest}){{
         : (
             <Redirect
                 to={{
-                    pathname: "/not-authorized",
+                    pathname: "/not-",
                     state: {from:location}
                 }}
             />
