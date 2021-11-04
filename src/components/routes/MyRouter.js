@@ -1,6 +1,4 @@
-import PublicRoute from './PublicRoute'
 import PrivateRoute from './PrivateRoute'
-import NotAuthorized from '../views/NotAuthorized'
 import Login from '../views/Login'
 import Pay from '../views/Pay'
 import Dashboard from '../views/Dashboard'
@@ -10,6 +8,7 @@ import Account from '../views/Account'
 import Home from '../views/Home'
 import NotFound from '../views/NotFound'
 import NotLoggedIn from '../views/NotLoggedIn'
+import NotAuthorized from '../views/NotAuthorized'
 
 import {
     BrowserRouter as Router,
@@ -22,6 +21,9 @@ function MyRouter() {
                 <Switch>
                     
                     <Route path="/" exact>
+                        <Home />
+                    </Route>
+                    <Route path="/home" exact>
                         <Home />
                     </Route>
                     <Route path='/login'>

@@ -1,4 +1,9 @@
-import { createContext, useState, useEffect, useContext } from "react"
+import { 
+    createContext, 
+    useState,
+    useEffect, 
+    useContext 
+} from 'react'
 
 const AuthContext = createContext()
 
@@ -11,7 +16,7 @@ function AuthProvider({children}) {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        const loggedIn = parseInt(localStorage.getItem('loggedIN'))
+        const loggedIn = parseInt(localStorage.getItem('loggedIn'))
         if(loggedIn === 1) {
             setCurrentUser(loggedIn)
         }
@@ -25,7 +30,7 @@ function AuthProvider({children}) {
     }
 
     return (
-        <AuthContext.Provider value={value}> {/*context consumer.*/}
+        <AuthContext.Provider value={value}>
             {children}
         </AuthContext.Provider>
     )

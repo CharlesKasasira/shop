@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import { Link } from 'react-router-dom';
+import { useCart } from '../contexts/Cart'
 
 function Home() {
 
@@ -9,7 +10,8 @@ function Home() {
         currency: 'UGX',
     });
 
-    const [itemsInCart, setItemsInCart] = useState([])
+    const {itemsInCart, setItemsInCart} = useCart();
+    // const [itemsInCart, setItemsInCart] = useState([])
   
 
     const inventoryItems = [
