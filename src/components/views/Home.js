@@ -1,17 +1,17 @@
 import {useState} from 'react'
 import { Link } from 'react-router-dom';
 import { useCart } from '../contexts/Cart'
+import { useAuth } from '../contexts/Auth'
 
 function Home() {
+    const { currentUser } = useAuth()
+    const { itemsInCart, setItemsInCart } = useCart()
 
     // Create our number formatter.
     const formatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'UGX',
     });
-
-    const {itemsInCart, setItemsInCart} = useCart();
-    // const [itemsInCart, setItemsInCart] = useState([])
   
 
     const inventoryItems = [
@@ -43,9 +43,9 @@ function Home() {
 
     const addItemtoCart = itemID => {
         const filteredCartItems = itemsInCart.filter(itemInCart => itemInCart._id !== itemID)
-        const selectItem = inventoryItems.filter(inventoryItem => inventoryItem._id === itemID)
-        selectItem[0].qty = 1
-
+        let selectItem = inventoryItems.filter(inventoryItem => inventoryItem._id === itemID)
+        selectItem[0]['qty'] = 1
+        selectItem[0]['subtotal'] = Number(selectItem[0].price)
         setItemsInCart([...filteredCartItems, ...selectItem])
     }
 
