@@ -18,7 +18,7 @@ function Cart() {
 
     const removeCartItem = itemID => {
         let newCart = itemsInCart.filter(itemInCart => itemInCart._id !== itemID)
-        setItemsInCart([...newCart])        
+        return newCart        
     }
 
     useEffect(() => {
