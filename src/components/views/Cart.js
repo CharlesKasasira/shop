@@ -10,9 +10,19 @@ function Cart() {
         currency: 'UGX',
     });
 
+    const returnTotal = () => {
+        let sum = 0;
+        itemsInCart.forEach( item => sum += item.subtotal)
+        return sum;
+    }
+
+    const removeCartItem = itemID => {
+        let newCart = itemsInCart.filter(itemInCart => itemInCart._id !== itemID)
+        setItemsInCart([...newCart])        
+    }
+
     useEffect(() => {
-        let defaultTotal = 0
-        setTotal( itemsInCart.reduce( (currentItem, previousItem) => defaultTotal += previousItem.subtotal, 0))
+        setTotal(returnTotal(itemsInCart))
     },[])
 
     if(itemsInCart?.length > 0)
@@ -30,7 +40,14 @@ function Cart() {
                     <tbody>
                         {itemsInCart.map( (itemInCart, index) => 
                             <tr key={itemInCart._id}>
-                                <td>{itemInCart.name}</td>
+                                <td>
+                                    {itemInCart.name}<br />
+                                    <button onClick={() => {
+                                        let newItemsInCart = removeCartItem(itemInCart._id)
+                                        setItemsInCart([...newItemsInCart])
+                                        setTotal(returnTotal(newItemsInCart))
+                                    }}>Remove item</button>
+                                </td>
                                 <td>
                                     <input 
                                         type="number"
