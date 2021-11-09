@@ -10,9 +10,9 @@ function Cart() {
         currency: 'UGX',
     });
 
-    const returnTotal = () => {
+    const returnTotal = (items) => {
         let sum = 0;
-        itemsInCart.forEach( item => sum += item.subtotal)
+        items.forEach( item => sum += item.subtotal)
         return sum;
     }
 
