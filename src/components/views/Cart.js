@@ -1,3 +1,4 @@
+"🛒"
 import { useCart } from '../contexts/Cart'
 import { useEffect } from 'react'
 import { Link } from 'react-router-dom';
