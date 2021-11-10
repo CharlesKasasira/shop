@@ -87,10 +87,16 @@ function Cart() {
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>Total {formatter.format(total)}</th>  
+                            <th></th>
+                            <th>Total</th>  
+                            <th></th>
+                            <th>{formatter.format(total)}</th>
                         </tr>
                     </tfoot>
                 </table>
+
+                <Link to="/">Continue Shopping</Link>
+                <Link to="/checkout">Proceed to checkout</Link>
                 
             </div>
         )

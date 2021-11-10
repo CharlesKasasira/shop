@@ -43,10 +43,15 @@ function Home() {
 
     const addItemtoCart = itemID => {
         const filteredCartItems = itemsInCart.filter(itemInCart => itemInCart._id !== itemID)
-        let selectItem = inventoryItems.filter(inventoryItem => inventoryItem._id === itemID)
-        selectItem[0]['qty'] = 1
-        selectItem[0]['subtotal'] = Number(selectItem[0].price)
-        setItemsInCart([...filteredCartItems, ...selectItem])
+        // let selectItem = inventoryItems.filter(inventoryItem => inventoryItem._id === itemID)
+        // selectItem[0]['qty'] = 1
+        // selectItem[0]['subtotal'] = Number(selectItem[0].price)
+        let [selectItem] = inventoryItems.filter(inventoryItem => inventoryItem._id === itemID)
+
+        selectItem['qty'] = 1
+        selectItem['subtotal'] = Number(selectItem.price)
+
+        setItemsInCart([...filteredCartItems, selectItem])
     }
 
     const isItemInCart = itemID => {
