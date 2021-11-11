@@ -3,11 +3,17 @@ import { useCart } from '../contexts/Cart'
 import Countries from '../helpers/countries.elements'
 import Districts from '../helpers/districts.element'
 import USstates from '../helpers/states.elements'
+import { ugandaShillings, currencyFormatter } from '../helpers/currency.format'
 
 function Checkout() {
     const checkoutRef = useRef()
-    const { total } = useCart()
+    const { total, subTotal } = useCart()
     const [country, setCountry] = useState('Uganda')
+    const [discount, setDiscount] = useState(0)
+    const [tax, setTax] = useState(0)
+    const [shipping, setShipping] = useState(0)
+    const [voucher, setVoucher] = useState('')
+    const vouchers = []
     
     const handlePayment = () => {}
 
@@ -20,8 +26,8 @@ function Checkout() {
                 <fieldset>
                     <legend>Billing info</legend>
                     <div>
-                        <label>First name</label>
-                        <input type="text" placeholder="First name" />
+                        <label>Name</label>
+                        <input type="text" placeholder="name" />
                     </div>
                 </fieldset>
 
@@ -91,25 +97,31 @@ function Checkout() {
 
                 </fieldset>
 
-                {/* <fieldset>
-                    <legend>Payment method</legend>
-                    <p>subtotal {total}</p>
+                <fieldset>
+                    <legend>Cart details</legend>
+                    <p>subtotal {ugandaShillings.format(total)}</p>
                     <p>Shipping {shipping}</p>
                     <p>Discount {discount}</p>
                     <p>Tax {tax}</p>
-                    <p>Total {total + shipping + tax - discount}</p>
-                </fieldset> */}
+                    <p>Total {currencyFormatter((total + shipping + tax - discount), 'UGX')}</p>
+                </fieldset>
 
-                <div>
-                    <label>MoMo/MobileMoney</label>
-                    <input type="radio" name="payment_method" value="momo" />
-                    <label>Airtel</label>
-                    <input type="radio" name="payment_method" value="airtel" />
-                    <button onClick={handlePayment}>Pay now</button>
-                </div>
+                <fieldset>
+                    <legend>Payment</legend>
+                    <label>Voucher code</label>
+                    <input type="text" placeholder="voucher code" name="" id="" />
+                    <div>
+                        <label>MoMo/MobileMoney</label>
+                        <input type="radio" name="payment_method" value="momo" />
+                        <label>Airtel</label>
+                        <input type="radio" name="payment_method" value="airtel" />
+                        <button onClick={handlePayment}>Pay now</button>
+                    </div>
+                </fieldset>
                 
 
             </form>
+            
         </div>
     )
 }
