@@ -12,10 +12,32 @@ function Checkout() {
     const [discount, setDiscount] = useState(0)
     const [tax, setTax] = useState(0)
     const [shipping, setShipping] = useState(0)
-    const [voucher, setVoucher] = useState('')
-    const vouchers = []
+    const [voucher, setVoucher] = useState({})
+
+    const vouchers = {
+                        xxx: {rate: 10, status: 'active', amount: 10000},
+                        yyy: {rate: 15, status: 'expired', amount: 10000},
+                        zzz: {rate: 18, status: 'active', amount: null},
+                        ddd: {rate: 40, status: 'active', amount: 10000},
+                        www: {rate: null, status: 'active', amount: 10000},
+                        nnn: {rate: null, status: 'active', amount: null}
+                    }
     
     const handlePayment = () => {}
+
+    const getVoucherInfo = (appliedVoucher) => {
+        if(vouchers[appliedVoucher]){
+            if(vouchers[appliedVoucher]['status'] !== 'expired'){
+                if(!vouchers[appliedVoucher]['rate'] && !vouchers[appliedVoucher]['amount']){
+                    return {msg: 'null voucher'}
+                }
+                return vouchers[appliedVoucher]['amount'] > 0 ? {amount: vouchers[appliedVoucher]['amount']} : {amount: vouchers[appliedVoucher]['rate']}
+            }
+            return {msg: 'Expired voucher'}
+        }
+        return {msg: 'invalid voucher'}
+    }
+
 
     return (
         <div>
@@ -109,7 +131,14 @@ function Checkout() {
                 <fieldset>
                     <legend>Payment</legend>
                     <label>Voucher code</label>
-                    <input type="text" placeholder="voucher code" name="" id="" />
+                    <input type="text" placeholder="voucher code" onBlur={({target}) => {
+                        const voucherInfo = getVoucherInfo(target.value)
+                        if(voucherInfo?.msg){
+                            target.value = voucherInfo.msg
+                        } else {
+                            voucherInfo?.amount ? setDiscount(voucherInfo.amount) : setDiscount((voucherInfo.rate / 100)*total)
+                        }
+                    }} />
                     <div>
                         <label>MoMo/MobileMoney</label>
                         <input type="radio" name="payment_method" value="momo" />
