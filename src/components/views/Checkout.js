@@ -26,12 +26,13 @@ function Checkout() {
     const handlePayment = () => {}
 
     const getVoucherInfo = (appliedVoucher) => {
-        if(vouchers[appliedVoucher]){
-            if(vouchers[appliedVoucher]['status'] !== 'expired'){
-                if(!vouchers[appliedVoucher]['rate'] && !vouchers[appliedVoucher]['amount']){
+        const voucher = vouchers[appliedVoucher]
+        if(voucher){
+            if(voucher['status'] !== 'expired'){
+                if(!voucher['rate'] && !voucher['amount']){
                     return {msg: 'null voucher'}
                 }
-                return vouchers[appliedVoucher]['amount'] > 0 ? {amount: vouchers[appliedVoucher]['amount']} : {amount: vouchers[appliedVoucher]['rate']}
+                return voucher['amount'] > 0 ? {amount: voucher['amount']} : {amount: voucher['rate']}
             }
             return {msg: 'Expired voucher'}
         }
