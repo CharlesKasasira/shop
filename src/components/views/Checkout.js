@@ -93,7 +93,7 @@ function Checkout() {
                                 </div>
                                 <div>
                                     <label>Town/Village</label>
-                                    <input type="text"  />
+                                    <input type="text" placeholder="town/village"  />
                                 </div>
                             </>
                         :
