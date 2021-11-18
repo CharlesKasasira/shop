@@ -4,6 +4,7 @@ import Countries from '../helpers/countries.elements'
 import Districts from '../helpers/districts.element'
 import USstates from '../helpers/states.elements'
 import { ugandaShillings, currencyFormatter } from '../helpers/currency.format'
+import { Zones, getCountryZone } from '../helpers/shipping' 
 
 function Checkout() {
     const checkoutRef = useRef()
@@ -12,6 +13,7 @@ function Checkout() {
     const [discount, setDiscount] = useState(0)
     const [tax, setTax] = useState(0)
     const [shipping, setShipping] = useState(0)
+    const [zone, setZone] = useState(null)
     const [voucher, setVoucher] = useState({})
 
     const vouchers = {
@@ -81,7 +83,13 @@ function Checkout() {
                         <label>Country
                             <span className="required-label">*</span>
                         </label>
-                        <Countries onChange={({target}) => setCountry(target.value)} required id="country" />
+                        <Countries onChange={({target}) => {
+                                setCountry(target.value)
+                                setZone(getCountryZone(setCountry(target.value)))
+                            }} required id="country" />
+                        
+
+
                         {country === 'Uganda' 
                         ? 
                             <>

@@ -1,3 +1,49 @@
+
+export const Zones = {
+    'Zone A': {
+        name: 'DHL',
+        mode: 'flight',
+        classes: [
+            {
+                label: 'Expedited International',
+                duration_in_days: 5,
+                currency: 'USD',
+                cost: 90
+            },
+            {
+                label: 'First Class international',
+                duration_in_days: 15,
+                currency: 'USD',
+                cost: 90
+            },
+            {
+                label: 'Standard international',
+                duration_in_days: 45,
+                currency: 'USD',
+                cost: 30
+            },
+            {
+                label: 'Express',
+                duration_in_days: 12,
+                currency: 'USD', 
+                cost: 45
+            }
+    ]
+    },
+    'Zone B': [
+        {
+            company: 'DHL'
+            mode: 'road'
+            classes: []
+        }
+    ]
+}
+
+
+
+
+
+
 export const Zones = {
     'Zone A': {
         'transport_mode': ['air', 'sea'],
@@ -43,7 +89,7 @@ export const  regions = [
     {
         'region': 'asia',
         'zone': 'Zone A',
-        countries: ['china', 'japan', 'singapore'],
+        countries: ['China', 'Japan', 'Singapore'],
     },
     {
         'region': 'europe',
@@ -58,7 +104,7 @@ export const  regions = [
     {
         'region': 'africa',
         'zone': 'Zone B',
-        countries: ['Uganda', 'south_sudan','rwanda'],
+        countries: ['Uganda', 'South Sudan','Rwanda'],
     },
     {
         'region': 'middle_east',
@@ -97,4 +143,15 @@ let [region_which_contains_coutry] = regions.filter(region => region.countries.i
 const { zone } = region_which_contains_coutry
 
 console.log(Zones[zone]) */
+
+export const getCountryZone = (country) => {
+    let [region_which_contains_country] = regions.filter(region => region.countries.includes(country))
+
+    const { zone } = region_which_contains_country
+    return Zones[zone]
+}
+
+// console.log(getCountryZone('Uganda'))
+
+
 
