@@ -32,8 +32,8 @@ export const Zones = {
     },
     'Zone B': [
         {
-            company: 'DHL'
-            mode: 'road'
+            company: 'DHL',
+            mode: 'road',
             classes: []
         }
     ]
