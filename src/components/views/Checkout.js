@@ -85,6 +85,7 @@ function Checkout() {
                             <span className="required-label">*</span>
                         </label>
                         <Countries onChange={({target}) => {
+                                setShipping(0)
                                 setCountry(target.value)
                                 setZone(getCountryZone(target.value))
                             }} required id="country" />
@@ -142,12 +143,12 @@ function Checkout() {
                                         <div>
                                             <input 
                                             onChange={(event) => {
-                                                setShipping(0)
                                                 setShipping(Number(event.target.getAttribute('data-cost')))
                                             }}
-                                            id={`${theCompany.company}_${companyClass.label}`.toLowerCase().replace(' ', '_')} 
+                                            id={`${theCompany.company}_${companyClass.label}`.toLocaleLowerCase().replace(' ', '_')} 
                                             type="radio" name="shipping_class"
-                                            value={`${theCompany.company}_${companyClass.label}`} data-cost={companyClass.cost} />
+                                            value={`${theCompany.company}_${companyClass.label}`} 
+                                            data-cost={companyClass.cost} />
 
                                             <label htmlFor={`${theCompany.company}_${companyClass.label}`.toLocaleLowerCase().replace(' ', '_')}>{`${companyClass.label} ${companyClass.cost}`}</label>
                                         </div>)
