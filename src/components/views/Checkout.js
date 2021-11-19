@@ -6,6 +6,7 @@ import USstates from '../helpers/states.elements'
 import { ugandaShillings, currencyFormatter } from '../helpers/currency.format'
 import { Zones, getCountryZone } from '../helpers/shipping' 
 
+
 function Checkout() {
     const checkoutRef = useRef()
     const { total, subTotal } = useCart()
@@ -64,8 +65,8 @@ function Checkout() {
                     </div>
 
                     <div>
-                        <label>Company</label>
-                        <input type="text" name="" id="" />
+                        <label>Company (optional)</label>
+                        <input type="text" name="" placeholder="company"/>
                     </div>
 
                     <div>
@@ -85,7 +86,7 @@ function Checkout() {
                         </label>
                         <Countries onChange={({target}) => {
                                 setCountry(target.value)
-                                setZone(getCountryZone(setCountry(target.value)))
+                                setZone(getCountryZone(target.value))
                             }} required id="country" />
                         
 
@@ -127,6 +128,33 @@ function Checkout() {
 
 
                 </fieldset>
+
+                {zone?.error ?
+                        <div>{zone.error}</div>
+                        :  
+                        <fieldset>
+                            <legend>Shipping methods</legend>
+                            {zone && zone.map(theCompany => 
+                                <div>
+                                    <h1>{theCompany.company}</h1>
+                                    {
+                                        theCompany.classes.map((companyClass, index) => 
+                                        <div>
+                                            <input 
+                                            onChange={(event) => {
+                                                setShipping(0)
+                                                setShipping(Number(event.target.getAttribute('data-cost')))
+                                            }}
+                                            id={`${theCompany.company}_${companyClass.label}`.toLowerCase().replace(' ', '_')} 
+                                            type="radio" name="shipping_class"
+                                            value={`${theCompany.company}_${companyClass.label}`} data-cost={companyClass.cost} />
+
+                                            <label htmlFor={`${theCompany.company}_${companyClass.label}`.toLocaleLowerCase().replace(' ', '_')}>{`${companyClass.label} ${companyClass.cost}`}</label>
+                                        </div>)
+                                    }
+                                </div>)}
+                        </fieldset>
+                    }
 
                 <fieldset>
                     <legend>Cart details</legend>

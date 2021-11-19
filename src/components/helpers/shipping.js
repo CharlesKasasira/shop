@@ -1,40 +1,55 @@
 
 export const Zones = {
-    'Zone A': {
-        name: 'DHL',
-        mode: 'flight',
-        classes: [
+    'Zone A': [
             {
-                label: 'Expedited International',
-                duration_in_days: 5,
-                currency: 'USD',
-                cost: 90
-            },
-            {
-                label: 'First Class international',
-                duration_in_days: 15,
-                currency: 'USD',
-                cost: 90
-            },
-            {
-                label: 'Standard international',
-                duration_in_days: 45,
-                currency: 'USD',
-                cost: 30
-            },
-            {
-                label: 'Express',
-                duration_in_days: 12,
-                currency: 'USD', 
-                cost: 45
-            }
-    ]
-    },
+            company: 'DHL',
+            mode: 'flight',
+            classes: [
+                {
+                    label: 'Expedited International',
+                    duration_in_days: 5,
+                    currency: 'USD',
+                    cost: 120
+                },
+                {
+                    label: 'First Class international',
+                    duration_in_days: 15,
+                    currency: 'USD',
+                    cost: 90
+                },
+                {
+                    label: 'Standard international',
+                    duration_in_days: 45,
+                    currency: 'USD',
+                    cost: 30
+                }
+        ]
+        },
+        {
+            company: 'EMS',
+            mode: 'Water',
+            classes: [
+                {
+                    label: 'Standard International',
+                    duration_in_days: 45,
+                    currency: 'USD',
+                    cost: 40
+                }
+            ]
+        }
+    ],
     'Zone B': [
         {
-            company: 'DHL',
-            mode: 'road',
-            classes: []
+            company: 'Posta Uganda',
+            mode: 'Road',
+            classes: [
+                {
+                    label: 'Same day delivery',
+                    duration_in_days: 1,
+                    currency: 'UGX',
+                    cost: 45000
+                }
+            ]
         }
     ]
 }
@@ -44,7 +59,7 @@ export const Zones = {
 
 
 
-export const Zones = {
+/* export const Zones = {
     'Zone A': {
         'transport_mode': ['air', 'sea'],
         'shipping_methods': {
@@ -83,7 +98,7 @@ export const Zones = {
     'Zone B': {
         'transport_mode': ['air', 'road']
     },
-}
+} */
 
 export const  regions = [
     {
@@ -94,12 +109,12 @@ export const  regions = [
     {
         'region': 'europe',
         'zone': 'Zone A',
-        countries: ['uk', 'france', 'spain'],
+        countries: ['United Kingdom', 'France', 'Spain'],
     },
     {
         'region': 'north_america',
         'zone': 'Zone A',
-        countries: ['canada','usa'],
+        countries: ['Canada','United States'],
     },
     {
         'region': 'africa',
@@ -109,25 +124,13 @@ export const  regions = [
     {
         'region': 'middle_east',
         'zone': 'Zone B',
-        countries: ['united_arab_emirates']
+        countries: ['United Arab Emirates']
     }
 ]
 
-export const shipping_methods = {
-    'International': {
+const currencies = [
 
-    },
-    'Local': {
-
-    },
-    'Pick up': {
-
-    },
-    'Free': {
-
-    }
-}
-
+]
 
 // console.log(Object.keys(regions))
 // console.log(Object.values(regions)[1].countries)
@@ -147,8 +150,9 @@ console.log(Zones[zone]) */
 export const getCountryZone = (country) => {
     let [region_which_contains_country] = regions.filter(region => region.countries.includes(country))
 
-    const { zone } = region_which_contains_country
-    return Zones[zone]
+    let zone = region_which_contains_country ? region_which_contains_country.zone : null;
+
+    return zone ? Zones[zone] : {'error': "Sorry, we don't ship in that location"}
 }
 
 // console.log(getCountryZone('Uganda'))
