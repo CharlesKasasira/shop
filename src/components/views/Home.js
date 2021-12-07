@@ -2,6 +2,7 @@ import {useState} from 'react'
 import { Link } from 'react-router-dom';
 import { useCart } from '../contexts/Cart'
 import { useAuth } from '../contexts/Auth'
+import { FaAppStore } from 'react-icons/fa'
 
 function Home() {
     const { currentUser } = useAuth()
@@ -73,15 +74,16 @@ function Home() {
                                 </div>
                                 <div className="category">{inventoryItem.category}</div>
                                 <div>{formatter.format(inventoryItem.price)}</div>
+                                <div>⭐⭐⭐⭐⭐</div>
+                                < FaAppStore />
                                 <div className="cta">
-                                    <button><span>Wishlist</span></button>
-                                    <button><span>rating</span></button>
+                                    <button className="btn btn-primary" style={{"margin": "10px"}}>Add to Wishlist</button>
                                     
                                     {isItemInCart(inventoryItem._id)
                                     ? <Link to="/cart">view cart</Link>
-                                    : <button onClick={() => addItemtoCart(inventoryItem._id)}><span>Cart</span></button>
+                                    : <button className="btn btn-primary" style={{"margin": "10px"}} onClick={() => addItemtoCart(inventoryItem._id)}>Add to Cart</button>
                                 }
-                                    <button><span>Buy Now</span></button>
+                                    <button className="btn btn-primary" style={{"margin": "10px"}}>Buy Now</button>
                                 </div>
                             </li>
                         )
